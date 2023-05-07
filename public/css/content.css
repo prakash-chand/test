@@ -1,0 +1,378 @@
+.tokenfield .token .close {
+      font-family: Arial;
+      display: inline-block;
+      line-height: 100%;
+      font-size: 1.1em;
+      line-height: 1.49em;
+      margin-left: 5px;
+      float: none;
+      height: 100%;
+      vertical-align: top;
+      padding-right: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      color: #3c3c3c;
+  }
+  div.token{
+      height: 33px;
+      padding: 4px;
+      font-weight: 600;
+  }
+  .tokenfield .token {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      display: inline-block;
+      border: 1px solid #d9d9d9;
+      background-color: #ededed;
+      white-space: nowrap;
+      margin: -1px 5px 5px 0;
+      vertical-align: top;
+      cursor: default;
+      font-weight: 600;
+
+  }
+    .tokenfield .token-input{
+        background: none;
+        border: 0;
+        height: 20px;
+        padding: 0;
+        margin-bottom: 6px;
+        box-shadow: none;
+        width: 30px;
+        display: inline-flex;
+        font-weight: 600;
+    }
+    #tokenfield-tokenfield{
+      margin-top: 6px;
+    }
+    .iti__flag-container{
+      font-weight: bolder!important;
+      min-width: 84px;
+    }
+    #phone{
+      padding-left: 76px!important;
+      width: 0px;
+    }
+    #tokenInputDiv{
+      padding: 4px;
+      max-height: 125px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+
+#selection {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+#selection-outer {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #eee;
+  padding: 0.5rem;
+  width: 360px;
+  margin-top: 2rem;
+  transition: opacity 200ms;
+}
+
+#selection-outer.empty {
+  opacity: 0;
+}
+
+h2 {
+  margin: 0;
+  /* margin-bottom: 1rem; */
+  font-size: 1rem;
+  text-align: center;
+}
+
+#selection-emoji {
+  font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Segoe UI',
+    'Apple Color Emoji', 'Twemoji Mozilla', 'Noto Color Emoji', 'EmojiOne Color',
+    'Android Emoji';
+  font-size: 3rem;
+  margin-right: 1rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid #999;
+  background: #fff;
+}
+
+#trigger {
+  font-size: 2rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+/* new */
+
+#selection {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+#selection-outer {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #eee;
+  padding: 0.5rem;
+  width: 360px;
+  margin-top: 2rem;
+  transition: opacity 200ms;
+}
+
+#selection-outer.empty {
+  opacity: 0;
+}
+
+h2 {
+  margin: 0;
+  /* margin-bottom: 1rem; */
+  font-size: 1rem;
+  text-align: center;
+}
+
+#selection-emoji {
+  font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Segoe UI',
+    'Apple Color Emoji', 'Twemoji Mozilla', 'Noto Color Emoji', 'EmojiOne Color',
+    'Android Emoji';
+  font-size: 3rem;
+  margin-right: 1rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid #999;
+  background: #fff;
+}
+
+#trigger {
+  font-size: 2rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.popupContainer {
+  z-index: 100!important;
+  top: 25%!important;
+}
+
+
+.button-none::after{
+  display: none;
+}
+
+.accordion-item {
+  background-color: #ffffff;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.iti__selected-dial-code{
+  font-weight: 500;
+}
+
+.modal-header {
+  background-color: var(--gbw-green)!important;
+  color: #fff!important;
+  font-weight: 600!important;
+}
+
+
+/* new css */
+
+body{
+  background: #f8f9fa;
+  font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;
+  font-weight: 500;
+  
+  --gbw-green:#C71610;
+  --gbw-app-background:#e4d7d7; 
+  --gbw-ffffff:#ffffff; 
+  --gbw-212529:#212529;
+}
+
+.input-group-text{
+  color: var(--gbw-212529);
+}
+
+.iti--separate-dial-code .iti__selected-flag{
+  background-color: var(--gbw-ffffff)!important;
+}
+
+.iti__country-list{
+  background-color: var(--gbw-ffffff)!important;
+}
+
+#msg{
+  background-color: var(--gbw-ffffff)!important;
+  color: var(--gbw-212529)!important;
+}
+
+.tokenfield .token .close {
+      font-family: Arial;
+      display: inline-block;
+      line-height: 100%;
+      font-size: 1.1em;
+      line-height: 1.49em;
+      margin-left: 5px;
+      float: none;
+      height: 100%;
+      vertical-align: top;
+      padding-right: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      color: #3c3c3c;
+  }
+  div.token{
+      height: 33px;
+      padding: 4px;
+      font-weight: 600;
+  }
+  .tokenfield .token {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      display: inline-block;
+      border: 1px solid #d9d9d9;
+      background-color: #ededed;
+      color: black;
+      white-space: nowrap;
+      margin: -1px 5px 5px 0;
+      vertical-align: top;
+      cursor: default;
+      font-weight: 600;
+
+  }
+    .tokenfield .token-input{
+        background: none;
+        border: 0;
+        height: 20px;
+        padding: 0;
+        margin-bottom: 6px;
+        box-shadow: none;
+        width: 30px;
+        display: inline-flex;
+        font-weight: 600;
+        color: var(--gbw-212529);
+    }
+    #tokenfield-tokenfield{
+      margin-top: 6px;
+    }
+    .iti__flag-container{
+      font-weight: bolder!important;
+      min-width: 84px;
+    }
+    #phone{
+      padding-left: 76px!important;
+      width: 0px;
+    }
+    #tokenInputDiv{
+      padding: 4px;
+      max-height: 125px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      background: var(--gbw-ffffff);
+    }
+
+    .form-select, .form-control , .list-group-item{
+      background: var(--gbw-ffffff)!important;
+      color: var(--gbw-212529)!important;
+    }
+
+    .accordion-button {
+        background-color: var(--gbw-ffffff)!important;
+        color: var(--gbw-212529)!important;
+    }   
+
+    #collapseFive , #collapseTwo {
+        background-color: var(--gbw-ffffff)!important;
+        color: var(--gbw-212529)!important;
+    }
+
+
+    /* new css */
+
+    body {
+      padding: 15px;
+    }
+    
+    .checkbox-menu li label {
+        display: block;
+        padding: 3px 10px;
+        clear: both;
+        font-weight: normal;
+        line-height: 1.42857143;
+        color: #333;
+        white-space: nowrap;
+        margin:0;
+        transition: background-color .4s ease;
+    }
+    .checkbox-menu li input {
+        margin: 0px 5px;
+        top: 2px;
+        position: relative;
+    }
+    
+    .checkbox-menu li.active label {
+        background-color: #cbcbff;
+        font-weight:bold;
+    }
+    
+    .checkbox-menu li label:hover,
+    .checkbox-menu li label:focus {
+        background-color: #f5f5f5;
+    }
+    
+    .checkbox-menu li.active label:hover,
+    .checkbox-menu li.active label:focus {
+        background-color: #b8b8ff;
+    }
+   
+
+    .blink_me {
+      animation: blinker 1s linear infinite;
+    }
+    
+    @keyframes blinker {
+      50% {
+        opacity: 0.5;
+      }      
+    }
+
+
+
+    .redactor_toolbar{
+      position: sticky!important;
+      z-index: 9!important;
+    }
+  
+    .redactor_editor{
+      min-height: 215px;
+    }

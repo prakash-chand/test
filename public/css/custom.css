@@ -1,0 +1,84 @@
+body{
+    --gbw-app-background: #fefefe;
+    --gbw-font-color: #ffffff;
+}
+
+
+/* default property */
+body{
+    background-color: var(--gbw-app-background);
+    font-family: inter;
+    font-weight: 500;
+    font-size: 18px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    letter-spacing: 0.5px;
+}
+
+
+.btn-close{
+    box-sizing: inherit;
+    opacity: 1;
+}
+
+p{
+    font-size: 15px;
+}
+
+/* padding section */
+.pd-l-40{
+    padding-left: 40px;
+}
+.pd-r-40{
+    padding-right: 40px;
+}
+.pd-t-20{
+    padding-top: 20px;
+}
+.pd-t-10{
+    padding-top: 10px;
+}
+.pd-t-5{
+    padding-top: 5px;
+}
+.pd-b-10{
+    padding-bottom: 10px;
+}
+/* padding section */
+
+
+
+.email-container{
+    margin-top: 18px;
+    max-height: 150px;
+    overflow-y: scroll;
+    width: 100%;
+    padding-top: unset;
+    padding-bottom: unset;
+    border: 2px solid var(--bs-light-text);
+}
+
+.email-container > span{
+    margin-left: 3px;
+    margin-right: 3px;
+}
+p.text-start{
+    margin-bottom: 0px;
+}
+
+.close-email-box{
+    cursor: pointer;
+}
+
+.alert{
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #000000;
+}
+
+
+.display{    
+    display: block!important;
+}

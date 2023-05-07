@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Bulk Mail</title> -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+    </style>
+    <style>
+        .img-slider {
+            position: relative;
+            width: 340px;
+            height: 24px;
+            overflow: hidden;
+            margin: 0 auto;
+            margin-top: 15px;
+            margin-right: 20px;
+            text-align: right;
+            float: right;
+            white-space: nowrap;
+        }
+
+        .img-slider .slider-container {
+            position: absolute;
+            width: 400%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            animation: slider 36s infinite;
+        }
+
+        .img-slider .slider-container .slide {
+            position: relative;
+            width: 25%;
+            height: 100%;
+            float: left;
+            overflow: hidden
+        }
+
+        @keyframes slider {
+
+            0%,
+            22% {
+                left: 0
+            }
+
+            25%,
+            47% {
+                left: -100%
+            }
+
+            50%,
+            72% {
+                left: -200%
+            }
+
+            75%,
+            97% {
+                left: -300%
+            }
+        }
+
+
+        .animate-charcter {
+            text-transform: uppercase;
+            background-image: linear-gradient(-225deg,
+                    #231557 0%,
+                    #44107a 29%,
+                    #ff1361 67%,
+                    #fff800 100%);
+            background-size: auto auto;
+            background-clip: border-box;
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textclip 2s linear infinite;
+            display: inline-block;
+            font-size: 17.5px;
+            font-weight: 700;
+        }
+
+        @keyframes textclip {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .divider{
+            display: block;
+            border: 1px solid black;
+        }
+
+        .dropdown-toggle::after{
+            float: right;
+            margin-top: 8px;
+            font-size: 22px;
+        }
+
+        #example_length > label{
+            display: flex;
+            float: left;
+        }
+
+        #example_filter > label{
+            display: flex;
+            float: right;
+        }
+
+        #example{
+            margin-top: 30px;
+        }
+
+        #example_wrapper{
+            margin-top: 25px;
+        }
+        ul.pagination{
+            float: right;
+        }
+
+        .dataTables_empty{
+            text-align: center;
+            padding-top: 25%!important;
+            padding-bottom: 25%!important;
+        }
+
+        .showEmailStyle{
+            color: blue!important;
+            font-weight: 600!important;
+            border-bottom: 2px solid blue!important;
+        }
+
+
+        .alert{
+            padding-top: 8px!important;
+            padding-bottom: 8px!important;
+            color: #000000;
+            font-weight: 500;
+        }
+    </style>
+
+    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/redactor.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+</head>
+
+<body>
+    <div class="card pd-b-10 container-fluid pd-l-40 pd-r-40"
+        style="min-height: 100vh; width: 100%;">
+        
+        <!-- <div class="row">
+            <div class="col-md-12 pd-t-20">
+                <h2 id="software-name"><%= softwareDetails.softwareName %></h2>                
+            </div>
+        </div> -->
+
+        <div class="row pd-t-20">
+            <div class="col-md-12 pd-t-20" style="font-weight: 600;">
+                <span style="font-size: 18px; ">
+                    Welcome <%= username %>,
+                    <span style="font-size: 12px;">Your licence will expire <%= validity %></span>
+                </span>
+                <span style="float: right; font-size: 12px;">
+                    Version : <%= version %>
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-light email-container" role="alert" contenteditable="false"
+                    style="min-height: 100px;" id="email-box">
+                    <input type="text" placeholder="Add Email Id's (comma seperated)"
+                        style="width: 300px; border: none; top: 0; background: #fcfcfd; margin-top: 4px; outline: none;"
+                        id="email-input-box" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-start">
+                    Total Uploaded Emails :
+                    <span class="badge badge-dark" id="total-uploaded-emails"
+                        style="background: #c71610;font-weight: 500;font-size: 14px;">0</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="height: fit-content;">
+                <p class="text-start">Note:- Enter Comma(,) to Separate a Mail </p>
+            </div>
+
+            <div class="col-md-6 text-end" style="margin-top: -20px;">
+                <button type="button"
+                    style="color: var(--gbw-green); border: 2px solid var(--gbw-green); font-weight: 500;"
+                    id="upload-file" class="btn">Upload File</button>
+                <!-- <button type="button"
+                    style="color: var(--gbw-green); border: 2px solid var(--gbw-green); font-weight: 500;"
+                    id="filter-email" class="btn">Filter Mail</button> -->
+                <button type="button"
+                    style="color: var(--gbw-green); border: 2px solid var(--gbw-green); font-weight: 500;"
+                    id="clear-all" class="btn">Clear All</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="btn-group pd-t-20">
+                    <div class="dropdown btn-group" dropdown>
+                        <button id="list-account-dropdown" type="button"
+                            class="send-to-group-option-btn btn btn-default dropdown-toggle"
+                            style="white-space: nowrap; font-weight: 600; border: 2px solid; background: var(--gbw-ffffff); box-shadow: 0px 0px 1px black; color: var(--gbw-green); padding-left: 6px; padding-right: 6px;"
+                            dropdown-toggle>
+                            <span class="caret"></span>
+                            Select Accounts
+                            <span style="letter-spacing: -2px;">
+                                <span>(</span>
+                                <span class="selected-account-count">0</span>
+                                <span>)</span>
+                            </span>
+                        </button>
+                        <ul class="send-to-group-option dropdown-menu checkbox-menu allow-focus" role="menu"
+                            style="margin-top: 40px; max-height: 200px; overflow-y: scroll; min-width: 100%;">
+                            <li style="color: black; font-weight: 600;">
+                                <label><input type="checkbox" value="all"> Select all</label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    
+                    <span class="add-template" id="addAccountBtn"
+                        style="width: 38px;cursor: pointer;background: var(--gbw-green);color: white;border-top-right-radius: 4px;padding-top: 4px;padding-left: 2px;"
+                        title="Add Accounts">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-circle"
+                            viewBox="0 0 18 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z">
+                            </path>
+                        </svg>
+                    </span>
+                </div>
+
+                <!-- modal -->                
+                <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="top: 20%;">
+                        <div class="modal-content" style="box-shadow: 0px 0px 8px #000000d4;">
+                            <div class="modal-header"  style="padding-top: 6px; padding-bottom: 6px; padding-left: 8px;padding-right: 8px;">
+                                <h5 class="modal-title" style="font-size: 18px;">Add / Update Accounts</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 0; top: 0; height: 40px; padding-left: 12px; padding-right: 12px; border-top-left-radius: 19px; border-top-right-radius: 4px; background: #e30700; border-color: #ccc; color: white; font-weight: 700; font-size: 20px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="h6 account-modal-msg"></p>                                
+                                <div class="dropdown btn-group" dropdown="" style="margin-top: 10px;width: 100%;">
+                                    <button type="button" class="btn btn-default dropdown-toggle" style="white-space: nowrap;font-weight: 600;border: 2px solid;background: var(--gbw-ffffff);box-shadow: 0px 0px 1px black;color: var(--gbw-green);padding-left: 12px;padding-right: 12px;text-align: left;" dropdown-toggle="">
+                                        Select Accounts for Update
+                                    </button>
+                                    <ul class="dropdown-menu checkbox-menu allow-focus" role="menu" style="margin-top: 40px; max-height: 200px; overflow-y: scroll; min-width: 100%;">
+                                    </ul>
+                                </div>
+                                
+                                <p class="h6" style="margin-top: 22px; margin-left: 4px;">Enter Service Provider</p>
+                                <input type="email" class="form-control" placeholder="ex:- Gmail" name="service-provider">
+
+                                <p class="h6" style="margin-top: 22px; margin-left: 4px;">Email Id</p>
+                                <input type="email" class="form-control" placeholder="ex:- goyral@gmail.com" name="emailId">
+
+                                <p class="h6" style="margin-top: 22px; margin-left: 4px;">Access Password</p>
+                                <input type="text" class="form-control" placeholder="ex:- 123456789" name="access-pwd">
+  
+                            </div>                            
+                            <div class="modal-footer" style="padding-top: 6px; padding-bottom: 6px; padding-left: 8px;padding-right: 8px;">
+                                <button type="button" style="color: whtie; font-weight: 500; background: #c71610;" class="btn btn-danger modal-close">Close</button>
+                                <button type="button" style="color: var(--gbw-green); border: 2px solid var(--gbw-green); font-weight: 500;" class="btn" id="update-accounts">Save</button>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="text-info midator"
+                    style="color: #3a4faf!important; font-weight: 700; letter-spacing: 0.2px;margin-top: 15px;">
+                    <div class="img-slider">
+                        <div class="slider-container">
+                            <a class="slide animate-charcter" target="_blank"
+                                href="https://chrome.google.com/webstore/detail/goyral-map-extractor/jooahgmbabifggckhbgdjdkpabdnphon">Install
+                                Goyral Map Extractor</a>
+                            <a class="slide animate-charcter" target="_blank"
+                                href="https://chrome.google.com/webstore/detail/goyral-jd-extractor/almohjojkigeochkcncnmfaoleaakagm">Install
+                                Goyral Justdial Extractor</a>
+                            <a class="slide animate-charcter" target="_blank"
+                                href="https://chrome.google.com/webstore/detail/goyral-social-extractor/ehlehjifhhlplcgphegnmmeojcaleoln">Install
+                                Goyral Social Extractor</a>
+                            <a class="slide animate-charcter" target="_blank"
+                                href="https://chrome.google.com/webstore/detail/goyral-yt-comment-bot/lpmelddmkgimoaokdngaicmkagcpleep">Install
+                                Goyral Youtube Bot</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="max-width: 95%!important; height: 93%!important;">
+                        <div class="modal-content" style="box-shadow: 0px 0px 8px #000000d4; height: 100%;">
+                            <div class="modal-header"  style="padding-top: 6px; padding-bottom: 6px; padding-left: 8px;padding-right: 8px;">
+                                <h5 class="modal-title" style="font-size: 18px; border-bottom: 2px solid; padding-left: 4px; padding-right: 4px; letter-spacing: 0.4px; line-height: 25px;">Email Sending Reports</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 0; top: 0; height: 40px; padding-left: 12px; padding-right: 12px; border-top-left-radius: 19px; border-top-right-radius: 4px; background: #e30700; border-color: #ccc; color: white; font-weight: 700; font-size: 20px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="overflow: scroll;">
+                                
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <% if(!validity=="" || !validity){ %>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="modal fade show display" id="loginModal" tabindex="-1" role="dialog"
+                        aria-hidden="true" style="background-color: #fff;">
+                        <div class="modal-dialog" role="document" style="max-width: 50%!important; height: 25%!important; top: 25%;">
+                            <div class="modal-content" style="box-shadow: 0px 0px 8px #000000d4; height: 100%;">
+                                <div class="modal-header"  style="padding-top: 6px; padding-bottom: 6px; padding-left: 8px;padding-right: 8px;">
+                                    <h5 class="modal-title" style="font-size: 18px; padding-left: 4px; padding-right: 4px; letter-spacing: 0px; line-height: 25px;">Login Goyral Bulk Email</h5>
+                                </div>
+                                <div class="modal-body" style="position: absolute; top: 25%; right: 0; left: 0;">
+                                    <div class="row">
+                                        <label style="opacity: 1;">Enter Login Key :-</label>
+                                    </div>
+                                    <div class="row" style="margin-top: 8px;">
+                                        <div class="btn-group" style="width: 100%;">
+                                            <span style="width: 50px;cursor: pointer;background: var(--gbw-green);color: white;padding-top: 3px;padding-left: 4px;padding-right: 3px;border-top-left-radius: 5px;border-bottom-left-radius: 5px;">
+                                                <svg fill="#FFFFFF" height="35px" width="35px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-48.5 -48.5 582.02 582.02" xml:space="preserve" transform="rotate(270)" stroke="#FFFFFF">
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>                                                
+                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="6.790238"/>                                                
+                                                    <g id="SVGRepo_iconCarrier"> <g> <path d="M361.205,68.899c-14.663,0-28.447,5.71-38.816,16.078c-21.402,21.403-21.402,56.228,0,77.631 c10.368,10.368,24.153,16.078,38.815,16.078s28.447-5.71,38.816-16.078c21.402-21.403,21.402-56.228,0-77.631 C389.652,74.609,375.867,68.899,361.205,68.899z M378.807,141.394c-4.702,4.702-10.953,7.292-17.603,7.292 s-12.901-2.59-17.603-7.291c-9.706-9.706-9.706-25.499,0-35.205c4.702-4.702,10.953-7.291,17.603-7.291s12.9,2.589,17.603,7.291 C388.513,115.896,388.513,131.688,378.807,141.394z"/> <path d="M441.961,43.036C414.21,15.284,377.311,0,338.064,0c-39.248,0-76.146,15.284-103.897,43.036 c-42.226,42.226-54.491,105.179-32.065,159.698L0.254,404.584l-0.165,80.268l144.562,0.165v-55.722h55.705l0-55.705h55.705v-64.492 l26.212-26.212c17.615,7.203,36.698,10.976,55.799,10.976c39.244,0,76.14-15.282,103.889-43.032 C499.25,193.541,499.25,100.325,441.961,43.036z M420.748,229.617c-22.083,22.083-51.445,34.245-82.676,34.245 c-18.133,0-36.237-4.265-52.353-12.333l-9.672-4.842l-49.986,49.985v46.918h-55.705l0,55.705h-55.705v55.688l-84.5-0.096 l0.078-37.85L238.311,208.95l-4.842-9.672c-22.572-45.087-13.767-99.351,21.911-135.029C277.466,42.163,306.83,30,338.064,30 c31.234,0,60.598,12.163,82.684,34.249C466.34,109.841,466.34,184.025,420.748,229.617z"/> </g> </g>                                                
+                                                </svg>
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX" aria-label="Username" style="border-radius: unset;font-size: 14px;">
+                                            <button type="button" style="color: var(--gbw-green); border: 2px solid var(--gbw-green); font-weight: 500;" class="btn">Login</button>
+                                        </div>
+                                    </div>                              
+                                </div>                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="modal fade" id="emailSendingStatus" tabindex="-1" role="dialog"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="max-width: 95%!important; height: 93%!important;">
+                        <div class="modal-content" style="box-shadow: 0px 0px 8px #000000d4; height: 100%;">
+                            <div class="modal-header"  style="padding-top: 6px; padding-bottom: 6px; padding-left: 8px;padding-right: 8px;">
+                                <h5 class="modal-title" style="font-size: 18px; border-bottom: 2px solid; padding-left: 4px; padding-right: 4px; letter-spacing: 0.4px; line-height: 25px;">Email Sending Status</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 0; top: 0; height: 40px; padding-left: 12px; padding-right: 12px; border-top-left-radius: 19px; border-top-right-radius: 4px; background: #e30700; border-color: #ccc; color: white; font-weight: 700; font-size: 20px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="overflow: scroll;">
+                                <table id="emailSendingStatusTable" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Sender</th>
+                                            <th>Receiver</th>
+                                            <th>Sending Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Sender</th>
+                                            <th>Receiver</th>
+                                            <th>Sending Time</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="row  pd-t-20">
+            <div class="col-md-12">
+                <span class="error">
+                   
+                </span>
+            </div>
+            <div class="col-md-12">
+                <div id="select-template" class="form-group">
+                    <div class="btn-group" style="width: 100%;">
+                        <span class="add-template"
+                            style="width: 38px;cursor: pointer;background: var(--gbw-green);color: white;border-top-left-radius: 4px;padding-top: 8px;padding-left: 8px;"
+                            title="Add template">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-circle"
+                                viewBox="0 0 18 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z">
+                                </path>
+                            </svg>
+                        </span>
+                        <button id="list-template-dropdown"
+                            style="border-color: var(--gbw-green); background: var(--gbw-green); font-weight: 600; font-size: 18px; letter-spacing: 0.5px; text-align: left; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; border-top-right-radius: 0px; font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;"
+                            type="button" class="btn btn-secondary dropdown-toggle">Click to select template</button>
+                        <ul class="dropdown-menu"
+                            style="width: 100%; margin-top: 45px; border-radius: 0; padding-left: 10px; line-height: 35px; box-shadow: 0px 3px 10px #80808080;">
+                            <li style="color: black; font-weight: 600;">
+                                <label style="width: 100%;"><span>Comming Soon...</span></label>
+                            </li>
+                            <!-- <li style="color: black; font-weight: 600;">
+                                <label style="width: 100%;"><input type="radio" name="template"> <span>Comming Soon...</span></label>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="input-group" style="border-left: 2px solid #737c79;border-right: 2px solid #737c79;">
+                    <input type="text" class="form-control" placeholder="Subject" aria-label="Username"
+                        style="border-radius: unset;font-size: 14px;" id="email-subject">
+                    <input type="hidden" id="template-id" />
+                </div>
+                <div class="form-group">
+                    <div contenteditable="false" class="form-control" id="msg"
+                        style="cursor: text; height: 200px; overflow-y: scroll; border: 2px solid #737c79; font-weight: 500; font-size: 16px; letter-spacing: 0.4px; word-spacing: 0.7px; resize: none; border-top-left-radius: 0px; border-top-right-radius: 0px;padding: 0; border-top: unset;">
+                        <textarea rows="6" spellcheck="true" class="form-control" id="content" name="message"
+                            style="height: 100%;border: none;"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 pd-t-20">
+                <button type="button"
+                    style="color: var(--gbw-green); border: 2px solid var(--gbw-green); font-weight: 500;" class="btn"
+                    id="send-email">Send Email</button>
+                <button type="button"
+                    style="color: var(--gbw-green); border: 2px solid var(--gbw-green); font-weight: 500;" class="btn"
+                    id="show-report">Show Report</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="pd-t-5 text-danger-emphasis blink_me">Warning!! Please don't be spamming, it may be cause of account blocking...</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="form-check"><input class="form-check-input" type="checkbox" value=""
+                            id="flexCheckChecked3" checked="" /><label style="opacity: 1;" class="form-check-label"
+                            for="flexCheckChecked3">Delay Between Mail</label></div>
+                </div>
+                <div class="col-md-12 pd-t-20" style="display: flex;">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" style="height: 100%;"><input type="radio" value="manual"
+                                    name="timegap" checked /></div>
+                        </div>
+                        <input value="5" type="text" class="form-control delayInputBox" style="max-width: 150px;" />
+                        <div class="input-group-prepend"><span class="input-group-text" id=""
+                                style="font-size: 12px; height: 100%; font-weight: 600; border-top-left-radius: 0; background: var(--gbw-app-background); border-bottom-left-radius: 0;">Seconds</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"
+                                style="height: 100%; border-top-right-radius: 0; border-bottom-right-radius: 0;"><input
+                                    type="radio" value="random" name="timegap" /></div>
+                        </div>
+                        <div class="input-group-prepend"><span class="input-group-text" id=""
+                                style="/* border: none; */ border-top-left-radius: 0px; border-bottom-left-radius: 0px; height: 100%; font-weight: 600; background: var(--gbw-app-background);">Random</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="form-check"><input class="form-check-input" type="checkbox" value=""
+                            id="batching" /><label style="opacity: 1;" class="form-check-label"
+                            for="batching">Batching</label></div>
+                </div>
+                <div class="col-md-12 pd-t-20">
+                    <div class="input-group" style="line-height: 20px; font-size: 14px; font-weight: 400;">
+                        <span style="padding-top: 4px;">Send </span>
+                        <input id="total-batch-msg" placeholder="30" type="text" class="form-control"
+                            style="text-align: center; height: 25px;margin-left: 8px;max-width: 40px;padding-left: 5px;margin-right: 8px;padding-right: 5px;border-radius: 10%;" />
+                        <span style="padding-top: 4px;">mails and then wait for </span>
+                        <input id="batch-wait" placeholder="10" type="text" class="form-control"
+                            style="text-align: center; height: 25px;margin-left: 8px;max-width: 40px;padding-left: 5px;margin-right: 8px;padding-right: 5px;border-radius: 10%;" />
+                        <span style="padding-top: 4px;">minutes after each batch.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div
+            style="background-color: #292a2ae3; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; opacity: 0.8;">
+        </div> -->
+    </div>
+
+    <script src="js/jquery-3.6.3.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/redactor.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap4.min.js"></script>
+    
+
+
+
+    <script type="text/javascript">        
+        $(document).ready(function () {
+            $('#content').redactor();
+            $('#example').DataTable();                        
+        });
+    </script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
