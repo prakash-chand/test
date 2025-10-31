@@ -14,11 +14,11 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Build Docker image
-              run: docker build -t "${{ vars.DOCKERHUB_IMAGE }}":latest .
+              run: docker build -t ${{ vars.DOCKERHUB_IMAGE }}:latest .
               continue-on-error: true
 
             - name: Push to Docker Hub
               run: |
                   echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-                  docker push "${{ vars.DOCKERHUB_IMAGE }}":latest
+                  docker push ${{ vars.DOCKERHUB_IMAGE }}:latest
               continue-on-error: true
